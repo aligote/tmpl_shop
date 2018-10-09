@@ -1,0 +1,39 @@
+//-------- clear-fix
+@mixin clf {
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+//-------- margin center
+@mixin margin-center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+//-------- position (default: absolute) and (x,y);
+@mixin position($pos:absolute, $top:0, $left:0, $bottom:null, $right:null) {
+    position: $pos;
+    left: $left;
+    right: $right;
+    top: $top;
+    bottom: $bottom;
+}
+
+//-------- placeholders
+@mixin placeholder {
+    &::-webkit-placeholder {
+        @content;
+    }
+    &::-moz-placeholder {
+        @content;
+    }
+    &:-moz-placeholder {
+        @content;
+    }
+    &:-ms-placeholder {
+        @content;
+    }
+}

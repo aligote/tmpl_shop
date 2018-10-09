@@ -1,0 +1,38 @@
+/*
+* Display mixin
+*/
+
+
+@mixin box-sizing($val) {
+    -webkit-box-sizing: $val;
+    -moz-box-sizing: $val;
+    box-sizing: $val;
+}
+
+
+//-------- block, inline-block elm and width and height
+@mixin display($dspl:block, $w:100%, $h:100%) {
+    display: $dspl;
+    width: $w;
+    height: $h;
+}
+
+@mixin width-height($w:100%, $h:100%) {
+    width: $w;
+    height: $h;
+}
+
+@mixin max-width-height($w:auto, $h:auto, $mx-w:100%, $mx-h:100%) {
+    width: $w;
+    max-width: $mx-w;
+    height: $h;
+    max-height: $mx-h;
+}
+
+//-------- for :after, :before
+@mixin pseudo-elm($display:block, $w:100%, $h:100%) {
+    content: "";
+    display: $display;
+    width: $w;
+    height: $h;
+}

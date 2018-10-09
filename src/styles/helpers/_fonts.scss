@@ -1,0 +1,30 @@
+// fonts
+@mixin font-face-1($name, $path, $weight:normal, $style:normal) {
+    @font-face {
+        font-family: $name;
+        font-style: $style;
+        font-weight: $weight;
+        src: url($path + ".eot");
+        src: url($path + ".eot?#iefix") format("embedded-opentype"),
+             url($path + ".woff2") format("woff2"),
+             url($path + ".woff") format("woff"),
+             url($path + ".otf") format("opentype"),
+             url($path + ".ttf") format("truetype"),
+             url($path + ".svg#" + $name) format("svg");
+    }
+}
+/*
+* Example: @include font-face-1("fontello", "../fonts/fontello");
+*/
+
+@mixin font-face-2($name, $path, $format, $weight:normal, $style:normal) {
+    @font-face {
+        font-family: $name;
+        font-style: $style;
+        font-weight: $weight;
+        src: url($path) format($format);
+    }
+}
+/*
+* Example: @include font-face-2("fontello", "../fonts/fontello.otf", "opentype");
+*/

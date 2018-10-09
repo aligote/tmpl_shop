@@ -1,0 +1,41 @@
+.pagination {
+    padding: 60px 0 20px;
+    &__list {
+        text-align: center;
+    }
+    &__item {
+        @include display(inline-block, 50px, 50px);
+        margin: 0 10px;
+        text-align: center;
+        @include media-breakpoint-up(sm) {
+            @include width-height(25px, 25px);
+        }
+        a, span {
+            @include display;
+            color: inherit;
+            line-height: 50px;
+            @include media-breakpoint-down(sm) {
+                font-size: 20px;
+                font-size: 1.25rem;
+            }
+            @include media-breakpoint-up(md) {
+                line-height: 25px;
+            }
+        }
+        &.active {
+            background: inherit;
+            a, span {
+                color: #fff;
+            }
+        }
+        &.prev, &.next {
+            a, span {
+                color: inherit;
+                @include media-breakpoint-down(md) {
+                    font-size: 26px;
+                    font-size: 1.615rem;
+                }
+            }
+        }
+    }
+}

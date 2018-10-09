@@ -1,0 +1,36 @@
+/*
+* Text mixin
+*/
+
+//-------- calculate rem
+@function calcRem($pxSize) {
+	$remSize: $pxSize / $base-font-size;
+	@return #{$remSize}rem;
+}
+//-------- most used font-size / line-height
+@mixin font-size-height($px:$font-size, $lh:1.25em) {
+    font-size: $px;
+    font-size: calcRem($px);
+    line-height: $lh;
+}
+//-------- only font-size
+@mixin font-size($px:$font-size) {
+    font-size: $px;
+    font-size: calcRem($px);
+}
+
+
+//-------- quote 
+@mixin quote($content:"\"") {
+    position: relative;
+    &::before, &::after {
+        position: absolute;
+    }
+    &::before {
+        content: $content;
+        left: -7px;
+    }
+    &::after {
+        content: $content;
+    }
+}

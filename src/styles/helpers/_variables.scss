@@ -1,0 +1,34 @@
+
+// width & height
+$max-width: 1140px;
+
+// breakpoints
+$width-1: 568px;
+$width-2: 750px;
+$width-3: 1024px;
+$width-4: 1280px;
+$width-5: 1600px;
+$width-6: 1920px;
+
+/* path */
+$path_fonts: 	'../fonts';
+$path_img:		'../img';
+$path_img_bg:	'../img/bg';
+
+
+/* fonts */
+//@include font-face-1("fontello", "#{$path_fonts}/fontello");
+@include font-face-1("Roboto-Regular", "#{$path_fonts}/Roboto-Regular");
+@include font-face-1("Roboto-Bold", "#{$path_fonts}/Roboto-Bold");
+@include font-face-1("Roboto-Light", "#{$path_fonts}/Roboto-Light");
+
+$font-size:			16px;
+$base-font-size:	$font-size;
+$base-font-family:	"arial", sans-serif;
+
+$font-regular:	"Roboto-Regular";
+$font-bold:		"Roboto-Bold";
+$font-light:	"Roboto-Light";
+
+
+$primary-font: $font-regular;

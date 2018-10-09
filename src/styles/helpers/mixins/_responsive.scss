@@ -1,0 +1,95 @@
+/* responsive */
+$breakpoint-only: (
+	phablet: (
+		min-width: $width-1,
+		max-width: $width-2 - 1
+	),
+	tablet: (
+		min-width: $width-2,
+		max-width: $width-3 - 1
+	),
+	laptop: (
+		min-width: $width-3,
+		max-width: $width-4 - 1
+	),
+	desktop: (
+		min-width: $width-4,
+		max-width: $width-5 - 1
+	)
+);
+$breakpoint-down: (
+	mobile: (
+		max-width: $width-1 - 1
+	),
+	phablet: (
+		max-width: $width-2 - 1
+	),
+	tablet: (
+		max-width: $width-3 - 1
+	),
+	laptop: (
+		max-width: $width-4 - 1
+	),
+	desktop: (
+		max-width: $width-5 - 1
+	)
+);
+$breakpoint-up: (
+	phablet: (
+		min-width: $width-1
+	),
+	tablet: (
+		min-width: $width-2
+	),
+	laptop: (
+		min-width: $width-3
+	),
+	desktop: (
+		min-width: $width-4
+	),
+	desktop-l: (
+		min-width: $width-5
+	),
+	desktop-xl: (
+		min-width: $width-6
+	)
+);
+/* 
+* mobile - down
+* phablet - down, only, up
+* tablet - down, only, up
+* desktop - down, only, up
+* desktop-l - up
+* desktop-xl - up
+*/
+@mixin media-only($breakpoint) {
+	@each $screen, $map in $breakpoint-only {
+		$min-width: map-get($map, min-width);
+		$max-width: map-get($map, max-width);
+		@if $breakpoint == $screen {
+			@media screen and (min-width: $min-width) and (max-width: $max-width) {
+				@content;
+			}
+		}
+	}
+}
+@mixin media-down($breakpoint) {
+	@each $screen, $map in $breakpoint-down {
+		$max-width: map-get($map, max-width);
+		@if $breakpoint == $screen {
+			@media screen and (max-width: $max-width) {
+				@content;
+			}
+		}
+	}
+}
+@mixin media-up($breakpoint) {
+	@each $screen, $map in $breakpoint-up {
+		$min-width: map-get($map, min-width);
+		@if $breakpoint == $screen {
+			@media screen and (min-width: $min-width) {
+				@content;
+			}
+		}
+	}
+}

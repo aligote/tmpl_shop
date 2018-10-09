@@ -1,0 +1,100 @@
+/* very basic styles */
+
+html {
+    font-size: $base-font-size;
+}
+
+body {
+    font-family: $primary-font;
+}
+
+button {
+    background: inherit;
+	border: none;
+}
+
+textarea, input,
+a, button {
+	outline: none;
+	box-shadow: none;
+	&:hover,
+	&:focus,
+	&:active {
+		outline: 0 !important;
+		box-shadow: none !important;
+		-webkit-appearance: none !important;
+	}
+}
+
+a {
+    text-decoration: none;
+    color: gray;
+}
+
+em {
+	font-style: oblique;
+	font-size: .85em;
+}
+
+.italic {
+	font-style: italic;
+	font-size: .85em;
+}
+
+u, .underline {
+	text-decoration: underline;
+}
+
+b, strong {
+	font-weight: bold;
+}
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+	font-family: $font-bold;
+}
+
+h1, .h1 {
+	@include font-size(32px);
+}
+
+h2, .h2 {
+	@include font-size(28px);
+}
+
+h3, .h3 {
+	@include font-size(24px);
+}
+
+/*
+* Basic classes
+*/
+.relative {
+    position: relative;
+}
+
+$hide_up: md lg xl;
+$hide_down: sm md lg;
+
+@each $size in $hide_up {
+	.hidden__up--#{$size} {
+		@include media-breakpoint-up($size) {
+			display: none !important;
+		}
+	}
+}
+@each $size in $hide_down {
+	.hidden__down--#{$size} {
+		@include media-breakpoint-down($size) {
+			display: none !important;
+		}
+	}
+}
+
+.section {
+	padding: 2rem 0;
+}

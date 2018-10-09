@@ -1,0 +1,40 @@
+/*
+* Transform
+*/
+
+
+//-------- transform
+@mixin translateX($pos:-50%) {
+    -webkit-transform: translateX($pos);
+    -ms-transform: translateX($pos);
+    -o-transform: translateX($pos);
+    transform: translateX($pos);
+}
+@mixin translateY($pos:-50%) {
+    -webkit-transform: translateY($pos);
+    -ms-transform: translateY($pos);
+    -o-transform: translateY($pos);
+    transform: translateY($pos);
+}
+@mixin translate($pos:-50%) {
+    -webkit-transform: translate($pos, $pos);
+    -ms-transform: translate($pos, $pos);
+    -o-transform: translate($pos, $pos);
+    transform: translate($pos, $pos);
+}
+
+//-------- rotate
+@mixin rotate($deg) {
+    -webkit-transform: rotate($deg);
+    -ms-transform: rotate($deg);
+    -o-transform: rotate($deg);
+    transform: rotate($deg);
+}
+
+//-------- multiple transform
+@mixin multi-transform($param) {
+    -webkit-transform: $param;
+    -ms-transform: $param;
+    -o-transform: $param;
+    transform: $param;
+}

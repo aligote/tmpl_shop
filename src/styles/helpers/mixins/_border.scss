@@ -1,0 +1,32 @@
+/*
+* Border mixin
+*/
+
+
+//-------- border width, style & color
+@mixin border($border:border, $bw:1px, $bstyle:solid, $bcol:transparent) {
+    @if $border == top {
+        border-top: $bw $bstyle $bcol;
+    }
+    @else if $border == bottom {
+        border-bottom: $bw $bstyle $bcol;
+    }
+    @else if $border == left {
+        border-left: $bw $bstyle $bcol;
+    }
+    @else if $border == right {
+        border-right: $bw $bstyle $bcol;
+    }
+    @else {
+        border: $bw $bstyle $bcol;
+    }
+}
+
+//-------- border-radius 
+@mixin border-radius($val:50%) {
+    -webkit-border-radius: $val;
+    -moz-border-radius: $val;
+    -ms-border-radius: $val;
+    -o-border-radius: $val;
+    border-radius: $val;
+}

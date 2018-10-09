@@ -1,0 +1,19 @@
+{{#each comments}}
+	<div class="comm__item{{#if class}} {{class}}{{/if}}">
+		<div class="comm__img">
+			{{#if image}}
+			<img src="{{image}}" alt="picture">
+			{{else}}
+			<i class="fa fa-4x fa-user-circle-o" aria-hidden="true"></i>
+			{{/if}}
+		</div>
+		<div class="comm__content">
+			<div class="comm__title">
+				{{name}}
+			</div>
+			<div class="comm__text">
+				<p>{{comment}}</p>
+			</div>
+		</div>
+	</div>
+{{/each}}

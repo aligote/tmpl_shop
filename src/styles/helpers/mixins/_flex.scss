@@ -1,0 +1,44 @@
+/*
+* Flex 
+*/
+
+
+//-------- flex
+@mixin flexbox {
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+@mixin flex-wrap($wrap:nowrap) {  
+    -webkit-flex-wrap: $wrap;
+    -moz-flex-wrap: $wrap;
+    flex-wrap: $wrap;
+}
+
+@mixin flex-justify($justify) {
+    -wenkit-justify-content: $justify;
+    -moz-justify-content: $justify;
+    justify-content: $justify;
+}
+
+@mixin flex-align-items($align) {
+    -webkit-align-items: $align;
+    -moz-align-items: $align;
+    align-items: $align;
+}
+
+@mixin flex-direction($val:column) {
+    -webkit-flex-direction: $val;
+    -moz-flex-direction: $val;
+    flex-direction: $val;
+}
+
+@mixin flex-order($val) {
+    -webkit-order: $val;
+    -moz-order: $val;
+    order: $val;
+}
