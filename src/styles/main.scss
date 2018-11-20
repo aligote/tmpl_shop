@@ -1,3 +1,9 @@
+/*
+* Partials
+*/
+@import "fonts";
+@import "color_theme";
+@import "variables";
 
 /*
 * Vendors
@@ -6,13 +12,15 @@
 @import "../../node_modules/bootstrap/scss/bootstrap";
 
 /*
-* Partials
+* Helpers
 */
-@import "helpers/fonts";
-@import "helpers/variables";
-@import "helpers/color_theme";
 @import "helpers/mixins";
-@import "helpers/custom";
+@import "helpers/basic";
+@import "helpers/partials/buttons";
+@import "helpers/partials/pagination";
+@import "helpers/partials/nav";
+@import "helpers/partials/modal";
+@import "helpers/partials/forms";
 
 /*
 * App

@@ -2,36 +2,5 @@
 * Buttons
 */
 .btn {
-    @extend .relative;
-    @include display(inline-block, 200px, auto);
-    @include border;
-    @include transition;
     overflow: hidden;
-    padding: .875rem 0;
-    text-align: center;
-    &-1 {
-        color: $cl_theme-black;
-        border-color: $cl_theme-black;
-        &:hover,
-        &:focus {
-            background: $cl_theme-black;
-            color: $cl_theme-light;
-        }
-        .line {
-            background: #000;
-        }
-    }
-    &-2 {
-        background: $cl_theme-black;
-        border-color: $cl_theme-black;
-        color: $cl_theme-light;
-        &:hover,
-        &:focus {
-            background: $cl_theme-light;
-            color: $cl_theme-black;
-        }
-        .line {
-            background: #fff;
-        }
-    }
 }

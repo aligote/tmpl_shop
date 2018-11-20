@@ -1,48 +1,8 @@
 .modal {
-    @include display(none, 100vw, 100vh);
-    @include position(fixed);
-    padding: 0 20px;
-    z-index: 9999;
-    background-color: rgba(0,0,0,0.8);
-    &__body {
-        @include width-height(90%, auto);
-        @include position(absolute, 50%, 50%);
-        @include translate;
-        background-color: #fff;
-        @include media-breakpoint-up(md) {
-            width: 768px;
-        }
-    }
-    &__header {
-        
-    }
-    &__container {
-        
-    }
-    &__form {
-        
-    }
-    &__close {
-        @include display($w:25px, $h:25px);
-        @include position($top:10px, $left:auto, $right:10px);
-        .icon {
-            @include display;
-            &::after, &::before {
-                @include pseudo-elm;
-                @include position;
-            }
-            &::before {
-                top: 11px;
-                left: 11px;
-                @include border(left, 1px, solid, #000);
-                @include rotate(45deg);
-            }
-            &::after {
-                top: 11px;
-                left: -9.5px;
-                @include border(right, 1px, solid, #000);
-                @include rotate(-45deg);
-            }
-        }
-    }
+    
+    &__body {}
+    &__header {}
+    &__container {}
+    &__form {}
+    &__close {}
 }
