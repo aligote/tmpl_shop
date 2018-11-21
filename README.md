@@ -1,8 +1,11 @@
-# gulp_bootstrap
+# gulp_shop_template
 
-my default gulp bootstrap project
+template for gulp bootstrap shop
 
-included plugins / libraries :
+## plugins / libraries :
 * jquery 3
 * slick-carousel
 * font-awesome 5
+
+## fonts:
+* Roboto
