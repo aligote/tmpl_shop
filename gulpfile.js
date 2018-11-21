@@ -16,25 +16,19 @@ const path			= require('path'),
 	uglify        	= require('gulp-uglify'),
 	browserify		= require('browserify'),
 	watchify		= require('watchify'),
-	babelify		= require('babelify'),
 	assign			= require('lodash.assign'),
 	buffer			= require('vinyl-buffer'),
 	source			= require('vinyl-source-stream'),
-	handlebars		= require('gulp-handlebars'),
 	// html
 	fileinclude   	= require('gulp-file-include'),
 	// json
 	jsonmin       	= require('gulp-jsonminify'),
 	//
 	sourcemaps    	= require('gulp-sourcemaps'),
-	wrap			= require('gulp-wrap'),
-	concat			= require('gulp-concat'),
-	declare			= require('gulp-declare'),
 	gutil         	= require('gulp-util'),
 	gulpif        	= require('gulp-if'),
 	cache         	= require('gulp-cache'),
 	rename        	= require('gulp-rename'),
-	merge			= require('merge-stream'),
 	del           	= require('del'),
 	production 		= false;
 
@@ -163,22 +157,6 @@ bm.on('update', bundleMain);
 bm.on('log', gutil.log);
 
 
-/*gulp.task('templates', function() {
-	return gulp.src(src + '/templates/*.hbs')
-		.pipe(handlebars({
-			handlebars: require('handlebars')
-		}))
-		.pipe(wrap('Handlebars.template(<%= contents %>)'))
-		.pipe(declare({
-			root: 'exports',
-			noRedeclare: true,
-		}))
-		.pipe(concat('templates.js'))
-		.pipe(wrap('var Handlebars = require("handlebars");\n <%= contents %>'))
-		.pipe(gulp.dest(src + '/js/'));
-});*/
-
-
 gulp.task('images', function() {
     return gulp.src(pathSrc.img)
         .pipe(cache(imagemin({
@@ -203,11 +181,12 @@ gulp.task('fontVendor', function() {
     return gulp.src(node+'/@fortawesome/fontawesome-free-webfonts/webfonts/*.*').pipe(gulp.dest(pathDest.fonts));
 });
 
-/*gulp.task('json', function() {
+
+gulp.task('json', function() {
     return gulp.src(src + '/*.json')
 		.pipe(jsonmin())
 		.pipe(gulp.dest(pathDest.html));
-});*/
+});
 
 
 gulp.task('webserver', function() {
@@ -230,21 +209,14 @@ gulp.task('clean', function() {
 });
 
 
-/*let builds = ['templates', 'clean', 'html', 'scss', 'jsVendor', 'jsMain', 'fonts', 'fontVendor', 'images', 'json'];*/
-let builds = ['clean', 'html', 'scss', 'jsVendor', 'jsMain', 'fonts', 'fontVendor', 'images'];
+let builds = ['clean', 'html', 'scss', 'jsVendor', 'jsMain', 'fonts', 'fontVendor', 'images', 'json'];
 
-/*gulp.task('watch', builds, function() {
-    gulp.watch(pathWatch.html, ['html']);
-    gulp.watch(pathWatch.scss, ['scss']);
-    gulp.watch(pathSrc.jsVendor, ['jsVendor']);
-    gulp.watch(pathWatch.js, ['jsMain']);
-    gulp.watch(src + '/*.json', ['json']);
-});*/
 gulp.task('watch', builds, function() {
     gulp.watch(pathWatch.html, ['html']);
     gulp.watch(pathWatch.scss, ['scss']);
     gulp.watch(pathSrc.jsVendor, ['jsVendor']);
     gulp.watch(pathWatch.js, ['jsMain']);
+    gulp.watch(src + '/*.json', ['json']);
 });
 
 
