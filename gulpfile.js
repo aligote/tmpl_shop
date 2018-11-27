@@ -38,12 +38,14 @@ let src     = './src',
     srvDir	= tmp,
     node    = './node_modules',
     pathSrc = {
-        html:       src + '/index.html',
+        html:       src + '/**/*.html',
+        amp:       	src + '/amp/*.html',
         scss:       src + '/styles/main.scss',
         jsMain:     src + '/js/main.js',
         jsVendor:   src + '/js/vendor.js',
         fonts:      src + '/fonts/**/*.*',
-        img:        src + '/img/**/*.*'
+        img:        src + '/img/**/*.*',
+        vendor:     src + '/vendor/**/*.*'
     },
     pathWatch = {
         html:   src + '/**/*.html',
@@ -57,10 +59,12 @@ let src     = './src',
 
 function buildDest(dest) {
     pathDest.html   = dest + '/';
+    pathDest.amp	= dest + '/amp/';
     pathDest.css    = dest + '/assets/css/';
     pathDest.js     = dest + '/assets/js/';
     pathDest.fonts  = dest + '/assets/fonts/';
     pathDest.img    = dest + '/assets/img/';
+    pathDest.vendor = dest + '/assets/vendor/';
 }
 
 if (production) {
@@ -77,8 +81,20 @@ gulp.task('html', function() {
             prefix: '@@',
             basepath: '@file'
         }))
-        .pipe(rename('index.html'))
         .pipe(gulp.dest(pathDest.html))
+        .pipe(reload({
+			stream: true
+		}));
+});
+
+
+gulp.task('amp', function() {
+    return gulp.src(pathSrc.amp)
+        .pipe(fileinclude({
+            prefix: '@@',
+            basepath: '@file'
+        }))
+        .pipe(gulp.dest(pathDest.amp))
         .pipe(reload({
 			stream: true
 		}));
@@ -189,6 +205,11 @@ gulp.task('json', function() {
 });
 
 
+gulp.task('vendor', function() {
+    return gulp.src(pathSrc.vendor).pipe(gulp.dest(pathDest.vendor))
+});
+
+
 gulp.task('webserver', function() {
     if (production) {
         srvDir = dist;
@@ -209,14 +230,15 @@ gulp.task('clean', function() {
 });
 
 
-let builds = ['clean', 'html', 'scss', 'jsVendor', 'jsMain', 'fonts', 'fontVendor', 'images', 'json'];
+let builds = ['clean', 'html', 'amp', 'scss', 'jsVendor', 'jsMain', 'fonts', 'fontVendor', 'images', 'json', 'vendor'];
 
 gulp.task('watch', builds, function() {
-    gulp.watch(pathWatch.html, ['html']);
+    gulp.watch(pathWatch.html, ['html', 'amp']);
     gulp.watch(pathWatch.scss, ['scss']);
     gulp.watch(pathSrc.jsVendor, ['jsVendor']);
     gulp.watch(pathWatch.js, ['jsMain']);
     gulp.watch(src + '/*.json', ['json']);
+    gulp.watch(pathSrc.vendor, ['vendor']);
 });
 
 
