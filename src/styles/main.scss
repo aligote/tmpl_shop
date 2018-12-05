@@ -1,14 +1,16 @@
 /*
 * Partials
 */
-@import "fonts";
 @import "color_theme";
 @import "variables";
 
 /*
 * Vendors
 */
-@import "../../node_modules/@fortawesome/fontawesome-free-webfonts/scss/fontawesome";
+@import "../vendor/fontawesome/scss/fontawesome";
+@import "../vendor/fontawesome/scss/fa-brands";
+@import "../vendor/fontawesome/scss/fa-regular";
+@import "../vendor/fontawesome/scss/fa-solid";
 @import "../../node_modules/bootstrap/scss/bootstrap";
 
 /*
@@ -16,11 +18,11 @@
 */
 @import "helpers/mixins";
 @import "helpers/basic";
-@import "helpers/partials/buttons";
-@import "helpers/partials/pagination";
-@import "helpers/partials/nav";
-@import "helpers/partials/modal";
-@import "helpers/partials/forms";
+@import "partials/buttons";
+@import "partials/pagination";
+@import "partials/nav";
+@import "partials/modal";
+@import "partials/forms";
 
 /*
 * App

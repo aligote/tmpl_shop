@@ -1,34 +1,32 @@
-
-// width & height
-$max-width: 1140px;
-
-// breakpoints
-$width-1: 568px;
-$width-2: 750px;
-$width-3: 1024px;
-$width-4: 1280px;
-$width-5: 1600px;
-$width-6: 1920px;
-
-/* path */
-$path_fonts: 	'../fonts';
-$path_img:		'../img';
-$path_img_bg:	'../img/bg';
+// FontAwesome
+$fa-font-path:                "../vendor/fontawesome/webfonts";
+$fa-font-size-base:           16px;
 
 
-/* fonts */
-//@include font-face-1("fontello", "#{$path_fonts}/fontello");
-@include font-face-1("Roboto-Regular", "#{$path_fonts}/Roboto-Regular");
-@include font-face-1("Roboto-Bold", "#{$path_fonts}/Roboto-Bold");
-@include font-face-1("Roboto-Light", "#{$path_fonts}/Roboto-Light");
+// Material Desgin Icons
+$mdi-font-path:					"../fonts";
+$mdi-font-size-base:			22px;
+$mdi-size:						$mdi-font-size-base;
 
-$font-size:			16px;
-$base-font-size:	$font-size;
-$base-font-family:	"arial", sans-serif;
-
-$font-regular:	"Roboto-Regular";
-$font-bold:		"Roboto-Bold";
-$font-light:	"Roboto-Light";
+// Fonts
+$font-family-sans-serif:		-apple-system, BlinkMacSystemFont, "Roboto", sans-serif;
 
 
-$primary-font: $font-regular;
+// Navbar & Navbar Brand
+$navbar-padding-y:				0;
+$navbar-brand-padding-y:		0;
+$navbar-height-desktop:			56px;
+$navbar-toggler-border-radius:  0;
+
+// Dropdowns
+$dropdown-min-width:			5rem;
+$dropdown-menu-padding:			0;
+$dropdown-padding-x-up:			.75rem;
+$dropdown-border-color:			rgba($black, .25);
+$dropdown-border-radius:        0;
+$dropdown-border-width:         0;
+$dropdown-box-shadow:           0 2px 1px rgba($black, .175);
+
+// Buttons + Forms
+$input-btn-padding-y:			.25rem;
+$input-btn-padding-x:			.75rem;

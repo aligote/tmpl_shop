@@ -193,9 +193,6 @@ gulp.task('images', function() {
 gulp.task('fonts', function() {
     return gulp.src(pathSrc.fonts).pipe(gulp.dest(pathDest.fonts));
 });
-gulp.task('fontVendor', function() {
-    return gulp.src(node+'/@fortawesome/fontawesome-free-webfonts/webfonts/*.*').pipe(gulp.dest(pathDest.fonts));
-});
 
 
 gulp.task('json', function() {
@@ -230,7 +227,7 @@ gulp.task('clean', function() {
 });
 
 
-let builds = ['clean', 'html', 'amp', 'scss', 'jsVendor', 'jsMain', 'fonts', 'fontVendor', 'images', 'json', 'vendor'];
+let builds = ['clean', 'html', 'amp', 'scss', 'jsVendor', 'jsMain', 'fonts', 'images', 'json', 'vendor'];
 
 gulp.task('watch', builds, function() {
     gulp.watch(pathWatch.html, ['html', 'amp']);
