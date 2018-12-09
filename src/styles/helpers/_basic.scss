@@ -43,19 +43,3 @@ $size-down: (xs, sm, md, lg);
 		}
 	}
 }
-
-.section {
-	padding: 1rem 0;
-}
-
-.page, .header, .main, .footer {
-	position: relative;
-}.header {
-	z-index: 3;
-}
-.main {
-	z-index: 2;
-}
-.footer {
-	z-index: 1;
-}

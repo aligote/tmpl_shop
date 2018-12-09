@@ -25,7 +25,8 @@ const path			= require('path'),
 	jsonmin       	= require('gulp-jsonminify'),
 	//
 	sourcemaps    	= require('gulp-sourcemaps'),
-	gutil         	= require('gulp-util'),
+    // gutil           = require('gulp-util'),
+	log         	= require('fancy-log'),
 	gulpif        	= require('gulp-if'),
 	cache         	= require('gulp-cache'),
 	rename        	= require('gulp-rename'),
@@ -114,7 +115,7 @@ gulp.task('scss', function() {
         }))
 		.pipe(gulpif(production, postcss(plugins)))
         .pipe(rename('main.min.css'))
-        .on('error', gutil.log)
+        .on('error', log.error('problems with main.css'))
         .pipe(sourcemaps.write("./", {
 			addComment: false
 		}))
@@ -135,7 +136,7 @@ function optionsBrsf(entryFiles) {
 let	bv = watchify(browserify(optionsBrsf(pathSrc.jsVendor)));
 function bundleVendor() {
 	return bv.bundle()
-		.on('error', gutil.log.bind(gutil, 'Browserify Error'))
+		.on('error', log.error('Browserify Error'))
 		.pipe(source('vendor.min.js'))
 		.pipe(buffer())
 		.pipe(babel({
@@ -152,7 +153,7 @@ gulp.task('jsVendor', bundleVendor);
 let	bm = watchify(browserify(optionsBrsf(pathSrc.jsMain)));
 function bundleMain() {
 	return bm.bundle()
-		.on('error', gutil.log.bind(gutil, 'Browserify Error'))
+		.on('error', log.error('Browserify Error'))
 		.pipe(source('main.min.js'))
 		.pipe(buffer())
 		.pipe(babel({
@@ -170,7 +171,7 @@ function bundleMain() {
 }
 gulp.task('jsMain', bundleMain);
 bm.on('update', bundleMain);
-bm.on('log', gutil.log);
+bm.on('log', log);
 
 
 gulp.task('images', function() {
@@ -217,7 +218,7 @@ gulp.task('webserver', function() {
             baseDir: srvDir
         },
         host: 'localhost',
-        port: 9000,
+        port: 8080,
     });
 });
 

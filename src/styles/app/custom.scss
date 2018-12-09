@@ -1,0 +1,62 @@
+/*
+* Custom parts
+*/
+.section {
+	padding: 1rem 0;
+}
+
+.page, .header, .main, .footer {
+	position: relative;
+}.header {
+	z-index: 3;
+}
+.main {
+	z-index: 2;
+}
+.footer {
+	z-index: 1;
+}
+
+// Button page up
+.pageUp {
+	@include size(25px, 25px);
+	position: fixed;
+	bottom: 2.5em;
+	right: .75em;
+	z-index: 999;
+	box-shadow: 0 0 15px $gray;
+	background-color: rgba($white, .25);
+	transition: $transition-base;
+	&:not(.show) {
+		opacity: 0;
+		visibility: hidden;
+	}
+	@include media-breakpoint-down(md) {
+		padding: 0 2px;
+	}
+	@include media-breakpoint-up(lg) {
+		bottom: 2em;
+		right: 1.5em;
+		padding: 0 6px;
+		@include size(50px, 50px);
+	}
+	@include media-breakpoint-up(xxl) {
+		right: 3em;
+	}
+	@include media-breakpoint-up(xxxl) {
+		right: 6em;
+	}
+	&:hover, &:active {
+		background-color: $primary;
+		color: $white;
+	}
+	i {
+		display: inline-block;
+		margin-top: -2px;
+		@include font-size(20px);
+		@include media-breakpoint-up(lg) {
+			margin-top: -5px;
+			@include font-size(40px);
+		}
+	}
+}
