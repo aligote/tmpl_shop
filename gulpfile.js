@@ -39,7 +39,7 @@ let src     = './src',
     srvDir	= tmp,
     node    = './node_modules',
     pathSrc = {
-        html:       src + '/**/*.html',
+        html:       src + '/*.html',
         amp:       	src + '/amp/*.html',
         scss:       src + '/styles/main.scss',
         jsMain:     src + '/js/main.js',
