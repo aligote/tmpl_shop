@@ -8,7 +8,7 @@ template for shop on bootstrap
 * jquery-lazy
 * jquery-touch
 * bootstrap 4
-* slick-carousel
+* ? slick-carousel
 * font-awesome 5
 
 ## fonts:

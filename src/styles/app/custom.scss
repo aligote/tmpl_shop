@@ -40,12 +40,12 @@
 		padding: 0 6px;
 		@include size(50px, 50px);
 	}
-	@include media-breakpoint-up(xxl) {
+	/*@include media-breakpoint-up(xxl) {
 		right: 3em;
 	}
 	@include media-breakpoint-up(xxxl) {
 		right: 6em;
-	}
+	}*/
 	&:hover, &:active {
 		background-color: $primary;
 		color: $white;

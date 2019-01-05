@@ -9763,8 +9763,12 @@ textarea {
   box-shadow: 0 0 15px #adb5bd;
   background-color: rgba(255, 255, 255, 0.25);
   transition: all 0.2s ease-in-out;
-  right: 3em;
-  right: 6em; }
+  /*@include media-breakpoint-up(xxl) {
+		right: 3em;
+	}
+	@include media-breakpoint-up(xxxl) {
+		right: 6em;
+	}*/ }
   .pageUp:not(.show) {
     opacity: 0;
     visibility: hidden; }

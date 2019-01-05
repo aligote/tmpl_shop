@@ -1,5 +1,5 @@
 {
-  "name": "bootstrap-project",
+  "name": "tmpl-bootstrap-shop",
   "version": "1.0.0",
   "description": "",
   "main": "src/index.html",
@@ -51,12 +51,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/telesyk/gulp_bs_website.git"
+    "url": "git+https://github.com/telesyk/tmpl_shop.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/telesyk/gulp_bs_website/issues"
+    "url": "https://github.com/telesyk/tmpl_shop/issues"
   },
-  "homepage": "https://github.com/telesyk/gulp_bs_website#readme"
+  "homepage": "https://github.com/telesyk/tmpl_shop#readme"
 }
