@@ -1,9 +1,9 @@
 /* jqueryLazy JS */
-'use strict';
 
 require('jquery-lazy');
 
-const jqueryLazyLoad = (function($) {
+(function($) {
+	'use strict';
 
 	const lazyload = {
 		$el:		$('img.lazyload'),

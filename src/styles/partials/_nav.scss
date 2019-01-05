@@ -2,6 +2,24 @@
 * Main navigation styles
 */
 .navbar {
+	&-collapse {
+		@include media-breakpoint-down(xs) {
+			width: 90%;
+		}
+		@include media-breakpoint-between(sm, md) {
+			width: 100%;
+			max-width: 420px;
+		}
+		@include media-breakpoint-down(md) {
+			height: 100vh;
+			position: fixed;
+			left: 0;
+			top: 0;
+			z-index: 9999;
+			padding: 1rem;
+			background: $black;
+		}
+	}
 }
 
 .nav {

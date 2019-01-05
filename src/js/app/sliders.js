@@ -1,7 +1,7 @@
-/* Main JS */
-'use strict';
+/* Sliders JS */
 
-const app = (function($) {
+(function($) {
+'use strict';
 
 	const slider = {
 		intro: '#introSlider'
@@ -14,9 +14,7 @@ const app = (function($) {
 	}
 
 	function sliders() {
-		return {
-			intro: _sliderBS(slider.intro)
-		}
+		_sliderBS(slider.intro);
 	}
 
 	return {

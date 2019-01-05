@@ -1,7 +1,7 @@
 /* PageUp JS */
-'use strict';
 
-const custom = (function($) {
+(function($) {
+	'use strict';
 
 	const $mobile		= $('.mobile'),
 		  $desktop		= $('.desktop'),

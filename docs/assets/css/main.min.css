@@ -9708,6 +9708,25 @@ a, button {
 /*
 * Main navigation styles
 */
+@media (max-width: 575.98px) {
+  .navbar-collapse {
+    width: 90%; } }
+
+@media (min-width: 576px) and (max-width: 991.98px) {
+  .navbar-collapse {
+    width: 100%;
+    max-width: 420px; } }
+
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 9999;
+    padding: 1rem;
+    background: #000; } }
+
 input,
 textarea {
   margin: 2px 0;

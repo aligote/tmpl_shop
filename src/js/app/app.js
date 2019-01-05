@@ -1,6 +1,6 @@
 /* Main JS */
 
-const app = (function($) {
+(function($) {
 	'use strict';
 
 	const app = {};
@@ -8,9 +8,9 @@ const app = (function($) {
 	function example() {
 		//let docWidth = $(document).width();
 		console.log( $(document).width() );
-		$(window).on('resize', function() {
-			console.log( $(document).width() );
-		});
+//		$(window).on('resize', function() {
+//			console.log( $(document).width() );
+//		});
 	}
 
 	return {

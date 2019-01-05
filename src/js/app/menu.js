@@ -1,19 +1,32 @@
 /* Menu JS */
 'use strict';
 
-function MenuConstructor (id) {
+function TheMenu (id) {
+	
     this.id = id;
-    this.button = document.querySelector(this.id);
+	
+	this.sandwitch = function() {
+    	let button = document.querySelectorAll(this.id);
+		
+		button.forEach(function(el) {
+			return _toggleSandwitch(el, 'show');
+		});
+	}
+	
+	function _toggleSandwitch(el, showClass) {
+		let target  = el.getAttribute('data-target'),
+			menu    = document.querySelector(target);
 
-    this.onclick = function() {
-        let target  = this.button.getAttribute('data-target'),
-            menu    = document.querySelector(target);
+		function _switchMenuClass() {
+			_switchClass(menu, showClass);
+		}
 
-        return toggleClass(menu, 'is-open');
-    }
+		return el.addEventListener('click', _switchMenuClass, false);
+	}
 
-    function toggleClass(el, newClass) {
-        if(!el.classList.contains(newClass)) {
+    function _switchClass(el, newClass) {
+		
+        if( !el.classList.contains(newClass) ) {
             el.classList.add(newClass);
         } else {
             el.classList.remove(newClass);
@@ -21,56 +34,8 @@ function MenuConstructor (id) {
     }
 }
 
-MenuConstructor.prototype.btnClick = function() {
-    this.button.addEventListener('click', this.onclick.bind(this), false);
-}
 
-const mainMenu = new MenuConstructor('button[data-toggle="menu"]');
-mainMenu.btnClick();
+const mainMenu = new TheMenu('button[data-toggle="menu"]');
 
-/*
-const Menu = (function() {
-    const options = {
-        element: '#menu'
-    };
-})();
-*/
+mainMenu.sandwitch();
 
-/*
-const mainMenu = (function() {
-    let ID;
-
-    const Menu = function (id) {
-        this.id = id;
-
-        this.fromLeft = function() {
-            console.log('Show the menu ' + this.id + ' from the left side');
-        };
-
-        this.fromRight = function() {
-            console.log('Show the menu ' + this.id + ' from the right side');
-        };
-    }
-
-    const menu = new Menu(ID);
-
-    return {
-        id:         ID,
-        from:       function(side) {
-            if(side === 'left') {
-                return menu.fromLeft();
-            } else {
-                return menu.fromRight();
-            }
-        }
-        // onLeft:     menu.fromLeft(),
-        // onRight:    menu.fromRight()
-    }
-
-    // const menu = new Menu('#menu');
-    // menu.showLeft();
-})();
-
-mainMenu.id = '#test';
-mainMenu.from('right');
-*/
