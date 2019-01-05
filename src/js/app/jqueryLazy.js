@@ -1,10 +1,9 @@
-/* Custom JS */
+/* jqueryLazy JS */
+'use strict';
 
 require('jquery-lazy');
 
 const jqueryLazyLoad = (function($) {
-
-	'use strict';
 
 	const lazyload = {
 		$el:		$('img.lazyload'),
@@ -20,7 +19,7 @@ const jqueryLazyLoad = (function($) {
 			}
 		}
 	};
-	
+
 	function _lazyLoad() {
 		let lazy = lazyload.$el.Lazy( lazyload.options );
 		return lazy;

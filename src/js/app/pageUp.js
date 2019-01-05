@@ -1,17 +1,16 @@
 /* PageUp JS */
+'use strict';
 
 const custom = (function($) {
 
-	'use strict';
-	
 	const $mobile		= $('.mobile'),
 		  $desktop		= $('.desktop'),
 		  $pageUpBtn	= $('#pageUp'),
 		  showClass		= 'show';
-	
+
 	let showAt = 650;
 
-	
+
 	function _pageUp(topElem, speed) {
 		$pageUpBtn.on('click', function() {
 			$('html, body').animate({
@@ -19,7 +18,7 @@ const custom = (function($) {
 			}, speed);
 		});
 	}
-	
+
 	function _onScroll() {
 		$(window).scroll(function() {
 			if( $(window).scrollTop() > showAt ) {
@@ -29,14 +28,14 @@ const custom = (function($) {
 			}
 		});
 	}
-	
+
 	function mobileChecking() {
 		if( !$desktop.length ) {
 			_onScroll();
 			_pageUp( 'body', 750 );
 		}
 	}
-	
+
 	function desktopChecking() {
 		showAt = 800;
 		if( !$mobile.length ) {

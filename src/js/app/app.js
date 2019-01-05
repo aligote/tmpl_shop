@@ -1,25 +1,20 @@
 /* Main JS */
 
-const app = (function() {
-
+const app = (function($) {
 	'use strict';
 
-	const app = {
-		introSlider: '#introSlider'
-	};
+	const app = {};
 
-	function _sliderIntro(elem) {
-		console.log( $(elem).length );
-	}
-
-	function sliders() {
-		return {
-			intro: _sliderIntro(app.introSlider)
-		}
+	function example() {
+		//let docWidth = $(document).width();
+		console.log( $(document).width() );
+		$(window).on('resize', function() {
+			console.log( $(document).width() );
+		});
 	}
 
 	return {
-		sliders: sliders
+		example:	example()
 	}
 
 })(jQuery);

@@ -1,53 +1,76 @@
-// drop menu plugin
-;(function() {
-    'use strict';
-    // 
-    // menu drop
-    $.fn.mobileMenu = function(options) {
-        //settings
-        var settings = $.extend({
-            navClose    : null,
-            speed       : 300
-        }, options);
-      
-        return this.each(function() {
-            
-            var navToggle 	= $(this),
-                navbar    	= $('#' + navToggle.data('toggle')),
-				navlink		= navbar.find('a'),
-                speed     	= settings.speed;
-            
-            navbar.addClass('mobileMenu').attr('aria-hidden', true);
-			
-			function closeNavbar() {
-				navbar.removeClass('is-open').attr('aria-hidden', true);
-			}
-			
-			function openNavbar() {
-				navbar.addClass('is-open').attr('aria-hidden', false);
-			}
-			
-			$(document).on('click', function(e) {
-				if(!navbar.is(e.target) && navbar.has(e.target).length === 0 && navToggle.has(e.target).length === 0) {
-					closeNavbar();
-				}			
-			});
-			
-				
-			navlink.on('click', closeNavbar);
-            
-            // open/close menu
-            if (settings.navClose === null) {
-                navToggle.on('click', openNavbar || closeNavbar);
-            } else {                
-                settings.navClose.on('click', closeNavbar);
-            }            
-            
-        });
+/* Menu JS */
+'use strict';
+
+function MenuConstructor (id) {
+    this.id = id;
+    this.button = document.querySelector(this.id);
+
+    this.onclick = function() {
+        let target  = this.button.getAttribute('data-target'),
+            menu    = document.querySelector(target);
+
+        return toggleClass(menu, 'is-open');
+    }
+
+    function toggleClass(el, newClass) {
+        if(!el.classList.contains(newClass)) {
+            el.classList.add(newClass);
+        } else {
+            el.classList.remove(newClass);
+        }
+    }
+}
+
+MenuConstructor.prototype.btnClick = function() {
+    this.button.addEventListener('click', this.onclick.bind(this), false);
+}
+
+const mainMenu = new MenuConstructor('button[data-toggle="menu"]');
+mainMenu.btnClick();
+
+/*
+const Menu = (function() {
+    const options = {
+        element: '#menu'
     };
-})(console.log('menu loaded'));
+})();
+*/
 
-/* menu */
-var navbarToggle   = $('#menuToggle');
+/*
+const mainMenu = (function() {
+    let ID;
 
-navbarToggle.mobileMenu({ speed: 500 });
+    const Menu = function (id) {
+        this.id = id;
+
+        this.fromLeft = function() {
+            console.log('Show the menu ' + this.id + ' from the left side');
+        };
+
+        this.fromRight = function() {
+            console.log('Show the menu ' + this.id + ' from the right side');
+        };
+    }
+
+    const menu = new Menu(ID);
+
+    return {
+        id:         ID,
+        from:       function(side) {
+            if(side === 'left') {
+                return menu.fromLeft();
+            } else {
+                return menu.fromRight();
+            }
+        }
+        // onLeft:     menu.fromLeft(),
+        // onRight:    menu.fromRight()
+    }
+
+    // const menu = new Menu('#menu');
+    // menu.showLeft();
+})();
+
+mainMenu.id = '#test';
+mainMenu.from('right');
+*/

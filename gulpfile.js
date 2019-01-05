@@ -35,7 +35,7 @@ const path			= require('path'),
 
 let src     = './src',
     dist    = './dist',
-    tmp		= './.tmp',
+    tmp		= './docs',
     srvDir	= tmp,
     node    = './node_modules',
     pathSrc = {

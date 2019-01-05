@@ -1,4 +1,7 @@
 /* custom */
-require('./app/app.js');
-require('./app/jqueryLazy.js');
-require('./app/pageUp.js');
+require('./app/app');
+require('./app/jqueryLazy');
+require('./app/sliders');
+require('./app/pageUp');
+require('./app/menu');
+//require('./app/example');
