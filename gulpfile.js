@@ -208,21 +208,6 @@ gulp.task('vendor', function() {
 });
 
 
-gulp.task('webserver', function() {
-    if (production) {
-        srvDir = dist;
-    }
-    
-    bs({
-        server: {
-            baseDir: srvDir
-        },
-        host: 'localhost',
-        port: 8080,
-    });
-});
-
-
 gulp.task('clean', function() {
     return del.sync(srvDir);
 });
@@ -237,6 +222,21 @@ gulp.task('watch', builds, function() {
     gulp.watch(pathWatch.js, ['jsMain']);
     gulp.watch(src + '/*.json', ['json']);
     gulp.watch(pathSrc.vendor, ['vendor']);
+});
+
+
+gulp.task('webserver', ['watch'], function() {
+    if (production) {
+        srvDir = dist;
+    }
+    
+    bs({
+        server: {
+            baseDir: srvDir
+        },
+        host: 'localhost',
+        port: 8080,
+    });
 });
 
 
