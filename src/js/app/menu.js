@@ -35,7 +35,7 @@ function TheMenu (id) {
 }
 
 
-const mainMenu = new TheMenu('button[data-toggle="menu"]');
+const mainMenu = new TheMenu('[data-toggle="menu"]');
 
 mainMenu.sandwitch();
 

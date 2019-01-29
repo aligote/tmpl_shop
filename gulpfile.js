@@ -107,22 +107,20 @@ gulp.task('scss', function() {
 		autoprefixer("last 2 versions", "> 1%"),
 		cssnano()
 	];
-    return gulp.src(pathSrc.scss)
-        .pipe(gulpif(!production, sourcemaps.init()))
-        .pipe(sass({
+    return gulp.src( pathSrc.scss )
+        .pipe( sourcemaps.init({loadMaps: !production}) )
+        .pipe( sass({
             sourceMap: true,
             errLogToConsole: true
-        }))
-		.pipe(gulpif(production, postcss(plugins)))
-        .pipe(rename('main.min.css'))
-        .on('error', log.error('problems with main.css'))
-        .pipe(sourcemaps.write("./", {
-			addComment: false
-		}))
-        .pipe(gulp.dest(pathDest.css))
-        .pipe(reload({
+        }) )
+		.pipe( gulpif(production, postcss(plugins)) )
+        .pipe( rename('main.min.css') )
+        .on( 'error', log.error('problems with main.css') )
+        .pipe( sourcemaps.write("./") )
+        .pipe( gulp.dest(pathDest.css) )
+        .pipe( reload({
 			stream: true
-		}))
+		}) )
 });
 
 
@@ -133,41 +131,39 @@ function optionsBrsf(entryFiles) {
 	});;
 }
 
-let	bv = watchify(browserify(optionsBrsf(pathSrc.jsVendor)));
+let	bv = watchify( browserify( optionsBrsf(pathSrc.jsVendor) ) );
 function bundleVendor() {
 	return bv.bundle()
-		.on('error', log.error('Browserify Error'))
-		.pipe(source('vendor.min.js'))
-		.pipe(buffer())
-		.pipe(babel({
+		.on( 'error', log.error('Browserify Error') )
+		.pipe( source('vendor.min.js') )
+		.pipe( buffer() )
+		.pipe( babel({
 			presets: ['env']
-		}))
-		.pipe(gulpif(production, uglify()))
-		.pipe(gulp.dest(pathDest.js))
-        .pipe(reload({
+		}) )
+		.pipe( gulpif(production, uglify()) )
+		.pipe( gulp.dest(pathDest.js) )
+        .pipe( reload({
 			stream: true
-		}));
+		}) );
 }
 gulp.task('jsVendor', bundleVendor);
 
-let	bm = watchify(browserify(optionsBrsf(pathSrc.jsMain)));
+let	bm = watchify( browserify( optionsBrsf(pathSrc.jsMain) ) );
 function bundleMain() {
 	return bm.bundle()
-		.on('error', log.error('Browserify Error'))
-		.pipe(source('main.min.js'))
-		.pipe(buffer())
-		.pipe(babel({
+		.on( 'error', log.error('Browserify Error') )
+		.pipe( source('main.min.js') )
+		.pipe( buffer() )
+		.pipe( sourcemaps.init({loadMaps: !production}) )
+		.pipe( babel({
 			presets: ['env']
-		}))
-		.pipe(gulpif(!production, sourcemaps.init()))
-		.pipe(gulpif(production, uglify()))
-		.pipe(sourcemaps.write("./", {
-			addComment: false
-		}))
-		.pipe(gulp.dest(pathDest.js))
-        .pipe(reload({
+		}) )
+		.pipe( gulpif(production, uglify()) )
+		.pipe( sourcemaps.write("./") )
+		.pipe( gulp.dest(pathDest.js) )
+        .pipe( reload({
 			stream: true
-		}));
+		}) );
 }
 gulp.task('jsMain', bundleMain);
 bm.on('update', bundleMain);
@@ -213,7 +209,17 @@ gulp.task('clean', function() {
 });
 
 
-let builds = ['clean', 'html', 'amp', 'scss', 'jsVendor', 'jsMain', 'fonts', 'images', 'json', 'vendor'];
+let builds = [
+	'clean', 
+	'html', 
+	'amp', 
+	'scss', 
+	'jsVendor', 
+	'jsMain', 'fonts', 
+	'images', 
+	'json', 
+	'vendor'
+];
 
 gulp.task('watch', builds, function() {
     gulp.watch(pathWatch.html, ['html', 'amp']);

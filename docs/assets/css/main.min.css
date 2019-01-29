@@ -9753,6 +9753,11 @@ textarea {
 .footer {
   z-index: 1; }
 
+.seo__container {
+  overflow: hidden; }
+  .seo__container.show {
+    height: auto !important; }
+
 .pageUp {
   width: 25px;
   height: 25px;
@@ -9762,13 +9767,7 @@ textarea {
   z-index: 999;
   box-shadow: 0 0 15px #adb5bd;
   background-color: rgba(255, 255, 255, 0.25);
-  transition: all 0.2s ease-in-out;
-  /*@include media-breakpoint-up(xxl) {
-		right: 3em;
-	}
-	@include media-breakpoint-up(xxxl) {
-		right: 6em;
-	}*/ }
+  transition: all 0.2s ease-in-out; }
   .pageUp:not(.show) {
     opacity: 0;
     visibility: hidden; }
@@ -9799,3 +9798,5 @@ textarea {
 /*
 * Page parts
 */
+
+/*# sourceMappingURL=main.min.css.map */

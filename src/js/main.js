@@ -1,5 +1,5 @@
 /* custom */
-require('./app/app');
+require('./app/custom');
 require('./app/jqueryLazy');
 require('./app/sliders');
 require('./app/pageUp');

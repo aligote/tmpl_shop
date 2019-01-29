@@ -1,7 +1,7 @@
 /* PageUp JS */
+'use strict';
 
 (function($) {
-	'use strict';
 
 	const $mobile		= $('.mobile'),
 		  $desktop		= $('.desktop'),

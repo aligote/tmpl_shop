@@ -1,7 +1,7 @@
 /* Sliders JS */
+'use strict';
 
 (function($) {
-'use strict';
 
 	const slider = {
 		intro: '#introSlider'
