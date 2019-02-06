@@ -3,6 +3,12 @@ const path			= require('path'),
 	watch         	= require('gulp-watch'),
 	bs            	= require('browser-sync'),
 	reload        	= bs.reload,
+	sourcemaps    	= require('gulp-sourcemaps'),
+	log         	= require('fancy-log'),
+	gulpif        	= require('gulp-if'),
+	cache         	= require('gulp-cache'), // for images
+	rename        	= require('gulp-rename'),
+	del           	= require('del'),
 	// css
 	sass          	= require('gulp-sass'),
 	cssnano        	= require('cssnano'),
@@ -22,23 +28,16 @@ const path			= require('path'),
 	// html
 	fileinclude   	= require('gulp-file-include'),
 	// json
-	jsonmin       	= require('gulp-jsonminify'),
-	//
-	sourcemaps    	= require('gulp-sourcemaps'),
-    // gutil           = require('gulp-util'),
-	log         	= require('fancy-log'),
-	gulpif        	= require('gulp-if'),
-	cache         	= require('gulp-cache'),
-	rename        	= require('gulp-rename'),
-	del           	= require('del'),
-	production 		= false;
+	jsonmin       	= require('gulp-jsonminify');
 
-let src     = './src',
-    dist    = './dist',
-    tmp		= './docs',
-    srvDir	= tmp,
-    node    = './node_modules',
-    pathSrc = {
+let production 		= false,
+	errorMsg		= '[Error] ',
+	src     		= './src',
+    dist    		= './dist',
+    tmp				= './docs',
+    srvDir			= tmp,
+    node    		= './node_modules',
+    pathSrc 		= {
         html:       src + '/*.html',
         amp:       	src + '/amp/*.html',
         scss:       src + '/styles/main.scss',
@@ -48,15 +47,15 @@ let src     = './src',
         img:        src + '/img/**/*.*',
         vendor:     src + '/vendor/**/*.*'
     },
-    pathWatch = {
-        html:   src + '/**/*.html',
-        js:     src + '/js/app/*.js',
-        scss:   src + '/styles/**/*.scss',
-        img:    src + '/img/**/*.*',
-        fonts:  src + '/fonts/**/*.*'
+    pathWatch 		= {
+        html:   	src + '/**/*.html',
+        js:     	src + '/js/app/*.js',
+        scss:   	src + '/styles/**/*.scss',
+        img:    	src + '/img/**/*.*',
+        fonts:  	src + '/fonts/**/*.*'
     },
-    pathDest    = {},
-    defaultTask = 'watch';
+    pathDest    	= {},
+    defaultTask 	= 'watch';
 
 function buildDest(dest) {
     pathDest.html   = dest + '/';
@@ -75,55 +74,7 @@ if (production) {
 	buildDest(tmp);
 }
 
-
-gulp.task('html', function() {
-    return gulp.src(pathSrc.html)
-        .pipe(fileinclude({
-            prefix: '@@',
-            basepath: '@file'
-        }))
-        .pipe(gulp.dest(pathDest.html))
-        .pipe(reload({
-			stream: true
-		}));
-});
-
-
-gulp.task('amp', function() {
-    return gulp.src(pathSrc.amp)
-        .pipe(fileinclude({
-            prefix: '@@',
-            basepath: '@file'
-        }))
-        .pipe(gulp.dest(pathDest.amp))
-        .pipe(reload({
-			stream: true
-		}));
-});
-
-
-gulp.task('scss', function() {
-	let plugins = [
-		autoprefixer("last 2 versions", "> 1%"),
-		cssnano()
-	];
-    return gulp.src( pathSrc.scss )
-        .pipe( sourcemaps.init({loadMaps: !production}) )
-        .pipe( sass({
-            sourceMap: true,
-            errLogToConsole: true
-        }) )
-		.pipe( gulpif(production, postcss(plugins)) )
-        .pipe( rename('main.min.css') )
-        .on( 'error', log.error('problems with main.css') )
-        .pipe( sourcemaps.write("./") )
-        .pipe( gulp.dest(pathDest.css) )
-        .pipe( reload({
-			stream: true
-		}) )
-});
-
-
+/* JS */
 function optionsBrsf(entryFiles) {
 	return assign({}, watchify.args, {
 		entries: [entryFiles],
@@ -132,9 +83,11 @@ function optionsBrsf(entryFiles) {
 }
 
 let	bv = watchify( browserify( optionsBrsf(pathSrc.jsVendor) ) );
-function bundleVendor() {
+function js_vendor() {
 	return bv.bundle()
-		.on( 'error', log.error('Browserify Error') )
+		.on( 'error', function(err) {
+			console.error(errorMsg + err.message + '|' + err.fileName + '|[' + err.lineNumber + ']') 
+		})
 		.pipe( source('vendor.min.js') )
 		.pipe( buffer() )
 		.pipe( babel({
@@ -146,12 +99,14 @@ function bundleVendor() {
 			stream: true
 		}) );
 }
-gulp.task('jsVendor', bundleVendor);
+//gulp.task('jsVendor', bundleVendor);
 
 let	bm = watchify( browserify( optionsBrsf(pathSrc.jsMain) ) );
-function bundleMain() {
+function js_main() {
 	return bm.bundle()
-		.on( 'error', log.error('Browserify Error') )
+		.on( 'error', function(err) {
+			console.error(errorMsg + err.message + '|' + err.fileName + '|[' + err.lineNumber + ']') 
+		})
 		.pipe( source('main.min.js') )
 		.pipe( buffer() )
 		.pipe( sourcemaps.init({loadMaps: !production}) )
@@ -165,12 +120,59 @@ function bundleMain() {
 			stream: true
 		}) );
 }
-gulp.task('jsMain', bundleMain);
-bm.on('update', bundleMain);
+//gulp.task('jsMain', bundleMain);
+bm.on('update', js_main);
 bm.on('log', log);
 
+/* CSS */
+function scss() {
+	let plugins = [
+		autoprefixer("last 2 versions", "> 1%"),
+		cssnano()
+	];
+    return gulp.src( pathSrc.scss )
+        .pipe( sourcemaps.init({loadMaps: !production}) )
+        .pipe( sass() )
+        .on( 'error', function(err) {
+			console.error(errorMsg + err.message + '|' + err.fileName + '|[' + err.lineNumber + ']') 
+		})
+		.pipe( gulpif(production, postcss(plugins)) )
+        .pipe( rename('main.min.css') )
+        .pipe( sourcemaps.write("./") )
+        .pipe( gulp.dest(pathDest.css) )
+        .pipe( reload({
+			stream: true
+		}) )
+}
 
-gulp.task('images', function() {
+/* HTML */
+function html() {
+    return gulp.src(pathSrc.html)
+        .pipe(fileinclude({
+            prefix: '@@',
+            basepath: '@file'
+        }))
+        .pipe(gulp.dest(pathDest.html))
+        .pipe(reload({
+			stream: true
+		}));
+}
+
+
+function amp() {
+    return gulp.src(pathSrc.amp)
+        .pipe(fileinclude({
+            prefix: '@@',
+            basepath: '@file'
+        }))
+        .pipe(gulp.dest(pathDest.amp))
+        .pipe(reload({
+			stream: true
+		}));
+}
+
+/* IMAGES */
+function images() {
     return gulp.src(pathSrc.img)
         .pipe(cache(imagemin({
             progressive: true,
@@ -184,58 +186,44 @@ gulp.task('images', function() {
         .pipe(reload({
 			stream: true
 		}));
-});
+}
 
-
-gulp.task('fonts', function() {
+/* FONTS */
+function fonts() {
     return gulp.src(pathSrc.fonts).pipe(gulp.dest(pathDest.fonts));
-});
+}
 
-
-gulp.task('json', function() {
+/* JSON */
+function json() {
     return gulp.src(src + '/*.json')
 		.pipe(jsonmin())
 		.pipe(gulp.dest(pathDest.html));
-});
+}
 
-
-gulp.task('vendor', function() {
+/* VENDOR */
+function vendor() {
     return gulp.src(pathSrc.vendor).pipe(gulp.dest(pathDest.vendor))
-});
+}
 
 
-gulp.task('clean', function() {
+function clean() {
     return del.sync(srvDir);
-});
+}
+
+function watching() {
+    gulp.watch(pathWatch.html, gulp.parallel(html, amp));
+    gulp.watch(pathWatch.scss, scss);
+    gulp.watch(pathSrc.jsVendor, js_vendor);
+    gulp.watch(pathWatch.js, js_main);
+    gulp.watch(src + '/*.json', json);
+    gulp.watch(pathSrc.vendor, vendor);
+}
 
 
-let builds = [
-	'clean', 
-	'html', 
-	'amp', 
-	'scss', 
-	'jsVendor', 
-	'jsMain', 'fonts', 
-	'images', 
-	'json', 
-	'vendor'
-];
-
-gulp.task('watch', builds, function() {
-    gulp.watch(pathWatch.html, ['html', 'amp']);
-    gulp.watch(pathWatch.scss, ['scss']);
-    gulp.watch(pathSrc.jsVendor, ['jsVendor']);
-    gulp.watch(pathWatch.js, ['jsMain']);
-    gulp.watch(src + '/*.json', ['json']);
-    gulp.watch(pathSrc.vendor, ['vendor']);
-});
-
-
-gulp.task('webserver', ['watch'], function() {
+function webserver() {
     if (production) {
         srvDir = dist;
     }
-    
     bs({
         server: {
             baseDir: srvDir
@@ -243,10 +231,12 @@ gulp.task('webserver', ['watch'], function() {
         host: 'localhost',
         port: 8080,
     });
-});
+}
 
 
-gulp.task('build', builds);
+const builds = gulp.parallel(amp, html, scss, js_vendor, js_main, images, fonts, json, vendor);
+const build = gulp.series(clean, builds);
+const serve = gulp.series(builds, gulp.parallel(watching, webserver));
 
 
-gulp.task('default', [defaultTask, 'webserver']);
+exports.default = serve;
