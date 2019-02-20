@@ -13,6 +13,7 @@ const path			= require('path'),
 	sass          	= require('gulp-sass'),
 	cssnano        	= require('cssnano'),
 	postcss       	= require('gulp-postcss'),
+	discardComments	= require('postcss-discard-comments'),
 	autoprefixer   	= require('autoprefixer'),
 	// images
 	imagemin      	= require('gulp-imagemin'),
@@ -26,11 +27,12 @@ const path			= require('path'),
 	buffer			= require('vinyl-buffer'),
 	source			= require('vinyl-source-stream'),
 	// html
+	nunjucks      	= require('gulp-nunjucks'),
 	fileinclude   	= require('gulp-file-include'),
 	// json
 	jsonmin       	= require('gulp-jsonminify');
 
-let production 		= false,
+let production 		= true,
 	errorMsg		= '[Error] ',
 	src     		= './src',
     dist    		= './dist',
@@ -127,6 +129,7 @@ bm.on('log', log);
 /* CSS */
 function scss() {
 	let plugins = [
+		discardComments({removeAll: true}),
 		autoprefixer("last 2 versions", "> 1%"),
 		cssnano()
 	];
@@ -148,17 +151,14 @@ function scss() {
 /* HTML */
 function html() {
     return gulp.src(pathSrc.html)
-        .pipe(fileinclude({
-            prefix: '@@',
-            basepath: '@file'
-        }))
+        .pipe(nunjucks.compile())
         .pipe(gulp.dest(pathDest.html))
         .pipe(reload({
 			stream: true
 		}));
 }
 
-
+/*
 function amp() {
     return gulp.src(pathSrc.amp)
         .pipe(fileinclude({
@@ -169,7 +169,7 @@ function amp() {
         .pipe(reload({
 			stream: true
 		}));
-}
+}*/
 
 /* IMAGES */
 function images() {
@@ -206,12 +206,13 @@ function vendor() {
 }
 
 
-function clean() {
-    return del.sync(srvDir);
+function clean(cb) {
+    del.sync(srvDir + '/*');
+    cb;
 }
 
 function watching() {
-    gulp.watch(pathWatch.html, gulp.parallel(html, amp));
+    gulp.watch(pathWatch.html, html);
     gulp.watch(pathWatch.scss, scss);
     gulp.watch(pathSrc.jsVendor, js_vendor);
     gulp.watch(pathWatch.js, js_main);
@@ -234,9 +235,11 @@ function webserver() {
 }
 
 
-const builds = gulp.parallel(amp, html, scss, js_vendor, js_main, images, fonts, json, vendor);
+const builds = gulp.parallel(html, scss, js_vendor, js_main, images, fonts, json, vendor);
 const build = gulp.series(clean, builds);
 const serve = gulp.series(builds, gulp.parallel(watching, webserver));
 
+
+exports.clean 	= clean;
 
 exports.default = serve;

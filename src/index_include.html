@@ -1,0 +1,53 @@
+<!doctype html>
+<html class="no-js">
+<head>
+	@@include("includes/head.html")
+</head>
+
+<body>
+<!-- main container for page elements -->
+<div class="page page-home" data-role="page">
+
+<!-- header -->
+@@include("includes/header.html")
+
+<!-- main -->
+<main class="main">
+
+@@include("includes/section/intro.html")
+
+@@include("includes/section/categories.html")
+
+@@include("includes/section/products.html")
+
+@@include("includes/section/utp.html")
+
+@@include("includes/section/seo.html")
+
+</main>
+
+<!-- footer -->
+@@include("includes/footer.html")
+
+</div><!-- .page -->
+
+@@include("includes/scripts.html")
+
+<!-- ONLY for home page -->
+<script>
+  if ($('#introSlider')) {
+    $(".carousel").swipe({
+      swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
+        if (direction == 'left') $(this).carousel('next');
+        if (direction == 'right') $(this).carousel('prev');
+      },
+      allowPageScroll: "vertical"
+    });
+  }
+  if ($('footer #currentYear').length) {
+    $('footer #currentYear').text(new Date().getFullYear());
+  }
+</script>
+
+</body>
+</html>

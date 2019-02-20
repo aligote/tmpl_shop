@@ -45,6 +45,8 @@ module.exports = function(button, options) {
             $target.css(styles);
 
             _this.on('click', function() {
+                
+                console.log(_this + ' clicks');
 
                 $(this).toggleClass('collapsed');
 

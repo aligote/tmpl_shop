@@ -1,0 +1,40 @@
+
+{# Set items #}
+{% set product_list = [{
+        "image": "assets/img/demo.jpg",
+        "title": "Product title 1"
+    },{
+        "image": "assets/img/demo.jpg",
+        "title": "Product title 2"
+    },{
+        "image": "assets/img/demo.jpg",
+        "title": "Product title 3"
+    }]
+%}
+
+<section class="section products">
+	<div class="section__layer section__front">
+		<div class="container">
+            <h2>Product</h2>
+			<div class="row">
+
+            {% for item in product_list %}
+            <div class="col-sm-6 col-lg-4">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top lazyload" src="assets/img/download.svg" data-src="{{ item.image }}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ item.title }}</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+
+                    {% import "../partials/btn.html" as button %}
+                    
+                    {{ button.link('test.html', class='btn-success', 'Buy', 'fa-shopping-cart', 'data-icon="sample"') }}
+                </div>
+            </div>
+            {% endfor %}
+
+			</div>
+		</div>
+	</div>
+</section><!-- .products -->

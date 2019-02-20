@@ -21,7 +21,7 @@ const readMore = require('./readMore');
 
 	return {
 		toReadMore:		toReadMore(),
-		example:		example(),
+		//example:		example(),
 	}
 
 })(jQuery);

@@ -1,0 +1,19 @@
+{% macro simple(class='', text='Read more', attr) %}
+<button class="btn {{ class | escape }}" {{ attr }}>
+    <span>{{ text }}</span>
+</button>
+{% endmacro %}
+
+{% macro icon(class='', text, icon, attr) %}
+<button class="btn {{ class | escape }}" {{ attr }}>
+    <span>{{ text }}</span>
+    <i class="fas {{ icon }}" aria-hidden="true"></i>
+</button>
+{% endmacro %}
+
+{% macro link(url, class='', text, icon, attr) %}
+<a href="{{ url }}" class="btn {{ class | escape }}" {{ attr }}>
+    <span>{{ text }}</span>
+    <i class="fas {{ icon }}" aria-hidden="true"></i>
+</a>
+{% endmacro %}

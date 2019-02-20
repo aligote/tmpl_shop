@@ -1,38 +1,24 @@
-<!doctype html>
-<html class="no-js">
-<head>
-	@@include("includes/head.html")
-</head>
+{% set page_title = 'New Main Page' %}
 
-<body>
-<!-- main container for page elements -->
-<div class="page page-home" data-role="page">
+{% extends 'templates/_layout.html' %}
+{#. #}
+{% block content %}
 
-<!-- header -->
-@@include("includes/header.html")
+<div class="container">
+    <h1>Welcome to the main page</h1>
+</div>
 
-<!-- main -->
-<main class="main">
+{% include "templates/section/intro.html" %}
 
-@@include("includes/section/intro.html")
+{% include "templates/section/products.html" %}
 
-@@include("includes/section/categories.html")
+{% include "templates/section/categories.html" %}
 
-@@include("includes/section/products.html")
+{% include "templates/section/seo.html" %}
 
-@@include("includes/section/utp.html")
+{% endblock %}
 
-@@include("includes/section/seo.html")
-
-</main>
-
-<!-- footer -->
-@@include("includes/footer.html")
-
-</div><!-- .page -->
-
-@@include("includes/scripts.html")
-
+{% block custom_script %}
 <!-- ONLY for home page -->
 <script>
   if ($('#introSlider')) {
@@ -48,6 +34,4 @@
     $('footer #currentYear').text(new Date().getFullYear());
   }
 </script>
-
-</body>
-</html>
+{% endblock %}
