@@ -1,9 +1,31 @@
-<footer id="footer" class="footer bg-dark text-light">
-	<div class="footer__top"></div><!-- .footer__top -->
-	<div class="footer__bottom py-4">
+<footer id="footer" class="footer bg-secondary text-white">
+	<div class="footer__top">
+		<div class="container">
+			<div class="row py-4">
+				<div class="col-sm-6 col-lg-4">
+					<img src="" alt="Company logotype">
+					<p><small>Short footer text</small></p>
+				</div>
+				<div class="col-sm-6 col-lg-4">
+					<nav class="nav flex-column">
+						<a href="" title="" class="nav-item">About</a>
+						<a href="" title="" class="nav-item">Blog</a>
+						<a href="" title="" class="nav-item">Contacts</a>
+					</nav>
+				</div>
+				<div class="col-sm-6 col-lg-4">
+					<p>Company contacts</p>
+					<p>Company social media links</p>
+				</div>
+			</div>
+		</div>
+	</div><!-- .footer__top -->
+	<div class="footer__bottom bg-dark text-light py-4">
 		<div class="container text-center">
 			<small>&copy; example.com, <span id="currentYear"></span>, developed by <a href="https://github.com/telesyk" title="lesyk" target="_blank">lesyk</a></small>
 		</div>
 	</div><!-- .footer__bottom -->
 </footer>
 <button id="pageUp" class="pageUp btn border-0"><i class="fas fa-chevron-up" aria-hidden="true"></i></button>
+
+{% include "templates/modals.html" %}

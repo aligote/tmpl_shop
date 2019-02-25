@@ -28,11 +28,11 @@ const path			= require('path'),
 	source			= require('vinyl-source-stream'),
 	// html
 	nunjucks      	= require('gulp-nunjucks'),
-	fileinclude   	= require('gulp-file-include'),
+	fileinclude   	= require('gulp-file-include'), // for amp
 	// json
 	jsonmin       	= require('gulp-jsonminify');
 
-let production 		= true,
+let production 		= false,
 	errorMsg		= '[Error] ',
 	src     		= './src',
     dist    		= './dist',
@@ -77,16 +77,18 @@ if (production) {
 }
 
 /* JS */
+let	bf_vendor = watchify( browserify( optionsBrsf(pathSrc.jsVendor) ) );
+let	bf_main = watchify( browserify( optionsBrsf(pathSrc.jsMain) ) );
+
 function optionsBrsf(entryFiles) {
 	return assign({}, watchify.args, {
 		entries: [entryFiles],
 		debug: !production
-	});;
+	});
 }
 
-let	bv = watchify( browserify( optionsBrsf(pathSrc.jsVendor) ) );
 function js_vendor() {
-	return bv.bundle()
+	return bf_vendor.bundle()
 		.on( 'error', function(err) {
 			console.error(errorMsg + err.message + '|' + err.fileName + '|[' + err.lineNumber + ']') 
 		})
@@ -101,11 +103,9 @@ function js_vendor() {
 			stream: true
 		}) );
 }
-//gulp.task('jsVendor', bundleVendor);
 
-let	bm = watchify( browserify( optionsBrsf(pathSrc.jsMain) ) );
 function js_main() {
-	return bm.bundle()
+	return bf_main.bundle()
 		.on( 'error', function(err) {
 			console.error(errorMsg + err.message + '|' + err.fileName + '|[' + err.lineNumber + ']') 
 		})
@@ -122,9 +122,8 @@ function js_main() {
 			stream: true
 		}) );
 }
-//gulp.task('jsMain', bundleMain);
-bm.on('update', js_main);
-bm.on('log', log);
+bf_main.on('update', js_main);
+bf_main.on('log', log);
 
 /* CSS */
 function scss() {

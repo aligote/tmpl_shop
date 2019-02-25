@@ -3,6 +3,10 @@
 */
 .section {
 	padding: 1rem 0;
+	&:nth-child(even) {
+		background-color: $primary;
+		color: $white;
+	}
 }
 
 .page, .header, .main, .footer {
@@ -21,6 +25,46 @@
 	overflow: hidden;
 	&.show {
 		height: auto !important;
+	}
+}
+
+// owl-carousel
+.owl-carousel {}
+.owl-stage {
+	@extend .d-flex;
+
+	&-outer {
+		overflow: hidden;
+	}
+}
+.owl-item {
+	.card {
+		width: 280px;
+	}
+}
+.owl-dots,
+.owl-nav {
+	&.disabled {
+		display: none;
+	}
+}
+.owl-nav {}
+.owl-dots {
+	@extend .d-flex;
+	@extend .justify-content-center;
+	@extend .my-2;
+}
+.owl-dot {
+	@include size(10px, 10px);
+	@extend .mx-1;
+	@extend .p-0;
+	display: block;
+	border: 1px solid $gray-200;
+	border-radius: 50%;
+	background-color: $gray;
+	cursor: pointer;
+	&.active {
+		background-color: $white;
 	}
 }
 

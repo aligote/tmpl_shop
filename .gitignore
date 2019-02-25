@@ -1,5 +1,6 @@
 bkp/
-.tmp/
+dist/
+docs/
 temp/
 
 *.js.map
@@ -44,9 +45,6 @@ coverage
 
 # nyc test coverage
 .nyc_output
-
-# Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
-.grunt
 
 # Optional eslint cache
 .eslintcache

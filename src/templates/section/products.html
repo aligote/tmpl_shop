@@ -9,6 +9,9 @@
     },{
         "image": "assets/img/demo.jpg",
         "title": "Product title 3"
+    },{
+        "image": "assets/img/demo.jpg",
+        "title": "Product title 4"
     }]
 %}
 
@@ -16,21 +19,19 @@
 	<div class="section__layer section__front">
 		<div class="container">
             <h2>Product</h2>
-			<div class="row">
+			<div id="products__carousel_1" class="d-flex">
 
             {% for item in product_list %}
-            <div class="col-sm-6 col-lg-4">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top lazyload" src="assets/img/download.svg" data-src="{{ item.image }}" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ item.title }}</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-
-                    {% import "../partials/btn.html" as button %}
-                    
-                    {{ button.link('test.html', class='btn-success', 'Buy', 'fa-shopping-cart', 'data-icon="sample"') }}
+            <div class="card">
+                <img class="card-img-top lazyload" src="assets/img/download.svg" data-src="{{ item.image }}" alt="Card image cap">
+                <div class="card-body">
+                    <div class="card-title h5">{{ item.title }}</div>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 </div>
+
+                {% import "../partials/btn.html" as button %}
+                
+                {{ button.link('test.html', class='btn-success mx-2 mb-2', 'Buy', 'fa-shopping-cart', 'data-icon="sample"') }}
             </div>
             {% endfor %}
 
